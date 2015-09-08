@@ -1,21 +1,12 @@
 module Utilities
-	
-	def evaluate(x)
-		if x % 100 == 0
-			if x % 400 == 0
-				true
-			else
-				false
-			end
-		elsif x % 4 == 0
-			true
-		else
-			false
-		end
-	end
+	SECONDS_IN_A_YEAR = 60 * 60 * 24 * 365.0
+
+	def leap_year(year)
+		(yearA(year) && yearB(year) ) || (leap(year) )
+	end	
 
 	def amount(a)
-		('%.1f' % ((a / 31536000.0) * 100)) + '%'
+		('%.1f' % ((a / SECONDS_IN_A_YEAR) * 100)) + '%'
 	end
 
 	def convert(x)
@@ -76,5 +67,19 @@ module Utilities
 
 		return ('%.1f' % (amount(c)[0..-2].to_f - amount(d)[0..-2].to_f)).to_s + '%'
 	end
+
+	private
+
+		def yearA(year)
+			(year % 100 == 0)
+		end
+
+		def yearB(year)
+			(year % 400 == 0)
+		end
+
+		def leap(leap)
+			(leap % 4 ==0)
+		end
 
 end
