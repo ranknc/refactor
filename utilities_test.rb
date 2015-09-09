@@ -12,14 +12,41 @@ class Methods2Test < MiniTest::Test
 	end
 
 	# Tests go here
-def test_leap_year
+	def test_leap_year
 	assert_equal true, @m.leap_year(800)
 	assert_equal true, @m.leap_year(400)
 	assert_equal false, @m.leap_year(5)
-end
-#def test_amount
-	#assert_equal , @m.amount()
-	#assert_equal , @m.amount()
-	#assert_equal , @m.amount()
-#end
+	end
+
+	def test_year_percent
+	assert_equal '100.0%', @m.year_percent(31536000.0)
+	assert_equal '200.0%', @m.year_percent(63072000.0)
+	assert_equal '50.0%', @m.year_percent(15768000.0)
+	end
+
+	def test_military_time
+		assert_equal "13:00", @m.military_time("1:00 pm")
+		assert_equal "8:00", @m.military_time("8:00 am")
+		assert_equal "17:00", @m.military_time("5:00 pm")
+		assert_equal "12:00", @m.military_time("12:00 pm")
+		assert_equal "11:00", @m.military_time("11:00 am")
+	end
+
+	#def test_
+		#assert_equal , @m.()
+		#assert_equal , @m.()
+		#assert_equal , @m.()
+	#end
+
+	#def test_
+		#assert_equal , @m.()
+		#assert_equal , @m.()
+		#assert_equal , @m.()
+	#end
+
+	#def test_
+		#assert_equal , @m.()
+		#assert_equal , @m.()
+		#assert_equal , @m.()
+	#end
 end

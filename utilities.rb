@@ -1,40 +1,23 @@
 module Utilities
-	SECONDS_IN_A_YEAR = 60 * 60 * 24 * 365.0
+SECONDS_IN_A_YEAR = 60 * 60 * 24 * 365.0
 
 	def leap_year(year)
 		(yearA(year) && yearB(year) ) || (leap(year) )
 	end	
 
-	def amount(a)
-		('%.1f' % ((a / SECONDS_IN_A_YEAR) * 100)) + '%'
+	def year_percent(a)
+		('%.1f'% ((a / SECONDS_IN_A_YEAR) * 100)) + '%'
 	end
 
-	def convert(x)
-		a, b = x.split(":")
-		c, d = b.split(" ")
-		e = ""
-
-		if d.downcase != 'am'
-			if a.to_i == 12
-				e = a + ":" + c
-			else
-				e = (a.to_i + 12).to_s + ":" + c
-			end
-		elsif d.downcase != 'pm'
-			if a.to_i == 12
-				e = (a.to_i - 12).to_s + ":" + c
-			else
-				e = a + ":" + c
-			end
-		end
-
-		return e
+	def military_time(x)
+		am(x) ? convert_am(x) : convert_pm(x) 
 	end
+
 
 	def convert2(x)
 		a, b = x.split(":")
 		c = ""
-
+		#((a.to_i < 12) c = a + b "am") || (c = a + b + "pm")
 		if a.to_i < 12
 			c = a + b + " am"
 		else
@@ -82,4 +65,25 @@ module Utilities
 			(leap % 4 ==0)
 		end
 
+		def am(x)
+			a, b = x.split(":")
+			c, d = b.split(" ")
+			d.downcase == 'am' ? true : false
+		end
+
+		def convert_am(x)
+			a, b = x.split(":")
+			c, d = b.split(" ")
+			e = ""
+			a.to_i == 12 ? e = (a.to_i - 12).to_s + ":" + c : e = a + ":" + c
+			return e
+		end
+
+		def convert_pm(x)
+			a, b = x.split(":")
+			c, d = b.split(" ")
+			e = ""
+			a.to_i == 12 ? e = a + ":" + c : e = (a.to_i + 12).to_s + ":" + c
+			return e 
+		end
 end
